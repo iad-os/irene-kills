@@ -1,20 +1,9 @@
 import { EventEmitter } from 'stream';
+import { consoleLoggerDefault, Logger } from './IreneKills';
 
 export type Signals = 'wakeup' | 'refresh' | 'health' | 'sick' | 'stop';
 
-const consoleLoggerDefault: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  error: (body: any, msg: string) => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  info: (body: any, msg: string) => void;
-} = {
-  error: (body, msg) => {
-    console.error(body, msg);
-  },
-  info: (body, msg) => {
-    console.log(body, msg);
-  },
-};
+
 type TransitionsType<States extends string> = Record<
   Signals,
   {
@@ -46,12 +35,7 @@ export class FSAManager<States extends string> {
       } | void>;
     }
   >;
-  private logger: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    error: (body: any, msg: string) => void;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    info: (body: any, msg: string) => void;
-  };
+  private logger: Logger;
 
   constructor({
     transitions,
@@ -78,16 +62,9 @@ export class FSAManager<States extends string> {
         failure: States;
       }[]
     >;
-    logger?: {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      error: (body: any, msg: string) => void;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      info: (body: any, msg: string) => void;
-    };
+    logger?: Logger
   }) {
-    this.logger = logger
-      ? { ...consoleLoggerDefault, ...logger }
-      : consoleLoggerDefault;
+    this.logger = logger ?? consoleLoggerDefault;
     this._state = { current: 0 };
     this.transitions = transitions;
     this.states = states;

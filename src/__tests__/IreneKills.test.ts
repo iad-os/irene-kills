@@ -9,6 +9,17 @@ describe('Irene Kills', function () {
     it('Create a new instance of Irene', () => {
       expect(new IreneKills()).toBeInstanceOf(IreneKills);
     });
+    it('Create a new instance of Irene passing a logger', () => {
+      const logger = {
+        error: (body: unknown, msg: string) => {
+          console.error(body, msg);
+        },
+        info: (body: unknown, msg: string) => {
+          console.log(body, msg);
+        },
+      };
+      expect(new IreneKills({ logger })).toBeInstanceOf(IreneKills);
+    });
     it('Multi istance isolation', () => {
       const failCheck = jest.fn();
       expect.assertions(2);
