@@ -1,108 +1,103 @@
-# Irene Kills
+<p align="center"> 
+  <img src="logo.png" alt="IK-logo" width="250px" height="250px">
+</p>
+<h1 align="center">Welcome to @iad-os/irene-kills 👋</h1>
+<p>
+  <a href="https://www.npmjs.com/package/@iad-os/irene-kills" target="_blank">
 
-<<div align="center">
-<img width="400" height="400" src="logo.png" alt="Irene Kills">
-</div>
+  <img alt="Version" src="https://img.shields.io/npm/v/@iad-os/irene-kills.svg">
+  </a>
+  <img src="https://img.shields.io/badge/node-%3E%3D%2016.13%20%3C17-blue.svg" />
+  <a href="#" target="_blank">
+  <img alt="License: Apache--2.0" src="https://img.shields.io/badge/License-Apache--2.0-yellow.svg" />
 
-[![Sponsor][sponsor-badge]][sponsor]
-[![TypeScript version][ts-badge]][typescript-4-5]
-[![Node.js version][nodejs-badge]][nodejs]
-[![APLv2][license-badge]][license]
-[![Build Status - GitHub Actions][gha-badge]][gha-ci]
+  </a>
+</p>
 
-👩🏻‍💻 Developer Ready: A comprehensive template. Works out of the box for most [Node.js][nodejs] projects.
+> Yes ... only if necessary, but ... Irene Kills!
 
-🏃🏽 Instant Value: All basic tools included and configured:
+## Table of content
 
-- [TypeScript][typescript] [4.5][typescript-4-5]
-- [ESLint][eslint] with some initial rules recommendation
-- [Jest][jest] for fast unit testing and code coverage
-- Type definitions for Node.js and Jest
-- [Prettier][prettier] to enforce consistent code style
-- NPM [scripts](#available-scripts) for common operations
-- Simple example of TypeScript code and unit test
-- .editorconfig for consistent file format
-- Reproducible environments thanks to [Volta][volta]
-- Example configuration for [GitHub Actions][gh-actions]
+* [About The Project](#about-the-project)
+* [Prerequisites](#prerequisites)
+* [Install](#install)
+* [Usage](#usage)
+* [Run tests](#run-tests)
+* [Author](#author)
+* [Contributors](#contributors)
 
-🤲 Free as in speech: available under the APLv2 license.
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-## Getting Started
+<!-- ABOUT THE PROJECT -->
 
-This project is intended to be used with the latest Active LTS release of [Node.js][nodejs].
+## 📝 About The Project
 
-### Use as a repository template
+<p align="justify"> 
+Irene Kills is a library written in TypeScript that allows you to easily manage the application life-cycle.
+We created this library to build applications that respect cloud native principles and to find a standard and tested way to manage the life cycle of our microservices.
 
-To start, just click the **[Use template][repo-template-action]** link (or the green button). Start adding your code in the `src` and unit tests in the `__tests__` directories.
+***IK - goals***
+It allows you to create applications that are resilient, able to detect changes in the system, detect errors and react accordingly, for example by killing itself or going into a sick state.
 
-### Clone repository
+Ensures that when the application is in a "healthy" state it is actually ready to respond.
+If an error occurs in the system that could affect the operation of the application, the application will notice the change and change its status.
 
-To clone the repository, use the following commands:
+</p>
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
+## Prerequisites
+
+* node >= 16.13 <17
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
+## Install
 
 ```sh
-git clone https://github.com/jsynowiec/node-typescript-boilerplate
-cd node-typescript-boilerplate
-npm install
+npm install @iad-os/irene-kills
 ```
 
-### Download latest release
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-Download and unzip the current **main** branch or one of the tags:
+## Usage
+
+WIP
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
+## Run tests
 
 ```sh
-wget https://github.com/jsynowiec/node-typescript-boilerplate/archive/main.zip -O node-typescript-boilerplate.zip
-unzip node-typescript-boilerplate.zip && rm node-typescript-boilerplate.zip
+npm run test
 ```
 
-## Available Scripts
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-- `clean` - remove coverage data, Jest cache and transpiled files,
-- `prebuild` - lint source files and tests before building,
-- `build` - transpile TypeScript to ES6,
-- `build:watch` - interactive watch mode to automatically transpile source files,
-- `lint` - lint source files and tests,
-- `test` - run tests,
-- `test:watch` - interactive watch mode to automatically re-run tests
+## Author
 
-## Additional Informations
+👤 **Daniele Fiungo <daniele.fiungo@iad2.it>**
 
-### Why include Volta
+* Github: [@danielefiungo](https://github.com/danielefiungo)
 
-[Volta][volta]’s toolchain always keeps track of where you are, it makes sure the tools you use always respect the settings of the project you’re working on. This means you don’t have to worry about changing the state of your installed software when switching between projects. For example, it's [used by engineers at LinkedIn][volta-tomdale] to standardize tools and have reproducible development environments.
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-I recommend to [install][volta-getting-started] Volta and use it to manage your project's toolchain.
+## Contributors
 
-### Writing tests in JavaScript
+<!--contributor image generated with https://contrib.rocks -->
 
-Writing unit tests in TypeScript can sometimes be troublesome and confusing. Especially when mocking dependencies and using spies.
+<a href="https://github.com/iad-os/irene-kills/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=iad-os/irene-kills" />
+</a>
 
-This is **optional**, but if you want to learn how to write JavaScript tests for TypeScript modules, read the [corresponding wiki page][wiki-js-tests].
+## Show your support
 
-## Backers & Sponsors
+Give a ⭐️ if this project helped you!
 
-Support this project by becoming a [sponsor][sponsor].
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 ## License
 
-Licensed under the APLv2. See the [LICENSE](https://github.com/jsynowiec/node-typescript-boilerplate/blob/main/LICENSE) file for details.
+Licensed under the APLv2. See the [LICENSE](https://github.com/iad-os/irene-kills/blob/main/LICENSE) file for details.
 
-[ts-badge]: https://img.shields.io/badge/TypeScript-4.5-blue.svg
-[nodejs-badge]: https://img.shields.io/badge/Node.js->=%2016.13-blue.svg
-[nodejs]: https://nodejs.org/dist/latest-v14.x/docs/api/
-[gha-badge]: https://github.com/jsynowiec/node-typescript-boilerplate/actions/workflows/nodejs.yml/badge.svg
-[gha-ci]: https://github.com/jsynowiec/node-typescript-boilerplate/actions/workflows/nodejs.yml
-[typescript]: https://www.typescriptlang.org/
-[typescript-4-5]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-5.html
-[license-badge]: https://img.shields.io/badge/license-APLv2-blue.svg
-[license]: https://github.com/jsynowiec/node-typescript-boilerplate/blob/main/LICENSE
-[sponsor-badge]: https://img.shields.io/badge/♥-Sponsor-fc0fb5.svg
-[sponsor]: https://github.com/sponsors/jsynowiec
-[jest]: https://facebook.github.io/jest/
-[eslint]: https://github.com/eslint/eslint
-[wiki-js-tests]: https://github.com/jsynowiec/node-typescript-boilerplate/wiki/Unit-tests-in-plain-JavaScript
-[prettier]: https://prettier.io
-[volta]: https://volta.sh
-[volta-getting-started]: https://docs.volta.sh/guide/getting-started
-[volta-tomdale]: https://twitter.com/tomdale/status/1162017336699838467?s=20
-[gh-actions]: https://github.com/features/actions
-[repo-template-action]: https://github.com/jsynowiec/node-typescript-boilerplate/generate
+Made with ❤️ by IAD
