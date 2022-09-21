@@ -3,7 +3,7 @@
   "version": "0.0.2-alpha",
   "description": "Yes ... only if necessary, but ... Irene Kills!",
   "engines": {
-    "node": ">= 16.13 <17"
+    "node": ">= 16.13"
   },
   "main": "build/lib/IreneKills.js",
   "types": "build/types/IreneKills.d.ts",
