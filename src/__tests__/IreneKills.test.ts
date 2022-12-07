@@ -16,6 +16,8 @@ describe('Irene Kills', function () {
         },
         info: (body: unknown, msg: string) => {
           console.log(body, msg);
+        }, debug: (body: unknown, msg: string) => {
+          console.log(body, msg);
         },
       };
       expect(new IreneKills({ logger })).toBeInstanceOf(IreneKills);

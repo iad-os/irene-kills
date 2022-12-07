@@ -95,7 +95,7 @@ export class FSAManager<States extends string> {
     const haveATransition = signalTransistions.find(
       (t) => t.current === this._state.current,
     );
-    this.logger.info(
+    this.logger.debug(
       { signal, haveATransition, signalTransistions },
       `Signal ${signal}`,
     );
@@ -131,7 +131,7 @@ export class FSAManager<States extends string> {
     to: States;
     signal: Signals;
   }): Promise<void> {
-    this.logger.info(
+    this.logger.debug(
       { current, to, signal },
       `${signal} -> Try change state: ${current} -> ${to}`,
     );

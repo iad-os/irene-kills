@@ -73,6 +73,7 @@ export type Logger = {
   error: (body: any, msg: string) => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   info: (body: any, msg: string) => void;
+  debug: (body: any, msg: string) => void;
 };
 
 export const consoleLoggerDefault: Logger = {
@@ -80,6 +81,9 @@ export const consoleLoggerDefault: Logger = {
     console.error(body, msg);
   },
   info: (body, msg) => {
+    console.log(body, msg);
+  },
+  debug:(body, msg) => {
     console.log(body, msg);
   },
 };
