@@ -88,7 +88,7 @@ export class FSAManager<States extends string> {
       };
     }) => void,
   ) {
-    this.events.on(event, cb);
+    this.events.once(event, cb);
   }
   async signal(signal: Signals) {
     const signalTransistions = this.transitions[signal];
