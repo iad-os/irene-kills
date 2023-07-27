@@ -1,9 +1,10 @@
+import { expect, it, describe, afterEach, vi } from 'vitest';
 import { IreneKills } from '../IreneKills';
 import { wait } from './utils.test';
 
 describe('Irene Kills', function () {
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
   describe('Configuration', function () {
     it('Create a new instance of Irene', () => {
@@ -16,14 +17,15 @@ describe('Irene Kills', function () {
         },
         info: (body: unknown, msg: string) => {
           console.log(body, msg);
-        }, debug: (body: unknown, msg: string) => {
+        },
+        debug: (body: unknown, msg: string) => {
           console.log(body, msg);
         },
       };
       expect(new IreneKills({ logger })).toBeInstanceOf(IreneKills);
     });
     it('Multi istance isolation', () => {
-      const failCheck = jest.fn();
+      const failCheck = vi.fn();
       expect.assertions(2);
       const irene1 = new IreneKills();
       const irene2 = new IreneKills();
@@ -81,9 +83,9 @@ describe('Irene Kills', function () {
     });
     it('Resource fail check', async () => {
       expect.assertions(2);
-      const failCheck = jest.fn();
+      const failCheck = vi.fn();
       const irene = new IreneKills();
-      const ireneKill = jest
+      const ireneKill = vi
         .spyOn(irene, 'kill')
         .mockImplementation(() => undefined);
       irene.resource('hello', {
@@ -114,7 +116,7 @@ describe('Irene Kills', function () {
   });
   describe('Multiresources', function () {
     it('One Resource without configs', function () {
-      const success = jest.fn();
+      const success = vi.fn();
 
       const irene = new IreneKills();
       irene.resource('hello', {});
@@ -131,13 +133,11 @@ describe('Irene Kills', function () {
     });
     it('The Initialize phase fails', async () => {
       expect.assertions(2);
-      const failCheck = jest.fn();
+      const failCheck = vi.fn();
       const irene = new IreneKills();
-      const ireneKill = jest
-        .spyOn(irene, 'kill')
-        .mockImplementation((reason) => {
-          console.log('🔪 Irene Killed', reason);
-        });
+      const ireneKill = vi.spyOn(irene, 'kill').mockImplementation((reason) => {
+        console.log('🔪 Irene Killed', reason);
+      });
       irene.resource('hello', {
         value: { text: 'hello' },
         need: () => {
@@ -149,7 +149,7 @@ describe('Irene Kills', function () {
 
       irene.resource('loadConfig', {
         need: () => {
-          return new Promise<{ loading: string }>((resolve, reject) => {
+          return new Promise<{ loading: string }>((_, reject) => {
             reject({ loading: 'fails' });
           });
         },
@@ -357,13 +357,11 @@ describe('Irene Kills', function () {
   describe('Sick', () => {
     it('Become sick then IRENE', async () => {
       const irene = new IreneKills();
-      const ireneKill = jest
-        .spyOn(irene, 'kill')
-        .mockImplementation((reason) => {
-          console.log('🔪 Irene Killed', reason);
-        });
+      const ireneKill = vi.spyOn(irene, 'kill').mockImplementation((reason) => {
+        console.log('🔪 Irene Killed', reason);
+      });
 
-      const checkMarkFn = jest.fn();
+      const checkMarkFn = vi.fn();
       irene
         .resource('jest_1', {
           on: {
@@ -399,13 +397,11 @@ describe('Irene Kills', function () {
     });
     it('Become sick with hope to healh', async () => {
       const irene = new IreneKills();
-      const ireneKill = jest
-        .spyOn(irene, 'kill')
-        .mockImplementation((reason) => {
-          console.log('🔪 Irene Killed', reason);
-        });
+      const ireneKill = vi.spyOn(irene, 'kill').mockImplementation((reason) => {
+        console.log('🔪 Irene Killed', reason);
+      });
 
-      const checkMarkFn = jest.fn();
+      const checkMarkFn = vi.fn();
       irene
         .resource('jest_1', {
           on: {
@@ -437,13 +433,11 @@ describe('Irene Kills', function () {
 
     it('some not healthy then sick', async () => {
       const irene = new IreneKills();
-      const ireneKill = jest
-        .spyOn(irene, 'kill')
-        .mockImplementation((reason) => {
-          console.log('🔪 Irene Killed', reason);
-        });
+      const ireneKill = vi.spyOn(irene, 'kill').mockImplementation((reason) => {
+        console.log('🔪 Irene Killed', reason);
+      });
 
-      const checkMarkFn = jest.fn();
+      const checkMarkFn = vi.fn();
       irene
         .resource('jest_1', {
           on: {
@@ -490,7 +484,7 @@ describe('Irene Kills', function () {
     });
     it('all healthy then NOT sick', async () => {
       const irene = new IreneKills();
-      const checkMarkFn = jest.fn();
+      const checkMarkFn = vi.fn();
       irene
         .resource('jest_1', {
           on: {
@@ -530,14 +524,12 @@ describe('Irene Kills', function () {
     });
     it('Initialize state fail', async () => {
       const irene = new IreneKills();
-      const ireneKill = jest
-        .spyOn(irene, 'kill')
-        .mockImplementation((reason) => {
-          console.log('🔪 Irene Killed', reason);
-        });
+      const ireneKill = vi.spyOn(irene, 'kill').mockImplementation((reason) => {
+        console.log('🔪 Irene Killed', reason);
+      });
       irene.resource('fake', {
         need: () => {
-          return new Promise<{ text: string }>((resolve, reject) => {
+          return new Promise<{ text: string }>((_, reject) => {
             reject({ loading: 'fails' });
           });
         },
@@ -548,12 +540,10 @@ describe('Irene Kills', function () {
     });
     it('Check state fail', async () => {
       const irene = new IreneKills();
-      const ireneKill = jest
-        .spyOn(irene, 'kill')
-        .mockImplementation((reason) => {
-          console.log('🔪 Irene Killed', reason);
-        });
-      const checkMark = jest.fn();
+      const ireneKill = vi.spyOn(irene, 'kill').mockImplementation((reason) => {
+        console.log('🔪 Irene Killed', reason);
+      });
+      const checkMark = vi.fn();
       irene.resource('fake', {
         need: () => {
           checkMark();
@@ -572,12 +562,10 @@ describe('Irene Kills', function () {
 
     it('Activate state fail', async () => {
       const irene = new IreneKills();
-      const ireneKill = jest
-        .spyOn(irene, 'kill')
-        .mockImplementation((reason) => {
-          console.log('🔪 Irene Killed', reason);
-        });
-      const checkMark = jest.fn();
+      const ireneKill = vi.spyOn(irene, 'kill').mockImplementation((reason) => {
+        console.log('🔪 Irene Killed', reason);
+      });
+      const checkMark = vi.fn();
       irene.resource('fake', {
         need: () => {
           checkMark();
@@ -597,12 +585,10 @@ describe('Irene Kills', function () {
     });
     it('Healthy state fail', async () => {
       const irene = new IreneKills();
-      const ireneKill = jest
-        .spyOn(irene, 'kill')
-        .mockImplementation((reason) => {
-          console.log('🔪 Irene Killed', reason);
-        });
-      const checkMark = jest.fn();
+      const ireneKill = vi.spyOn(irene, 'kill').mockImplementation((reason) => {
+        console.log('🔪 Irene Killed', reason);
+      });
+      const checkMark = vi.fn();
       irene.resource('fake', {
         need: () => {
           checkMark();
@@ -748,7 +734,7 @@ describe('Irene Kills', function () {
       );
     });
     it('Expect a sick state after healthy = false', async () => {
-      const checkCallFn = jest.fn();
+      const checkCallFn = vi.fn();
       const irene = new IreneKills();
       irene.resource('a', {
         sick: async () => {
@@ -779,9 +765,9 @@ describe('Irene Kills', function () {
     it('First sick and then healty', async () => {
       const test = { status: 1 };
 
-      const checkHealthy = jest.fn();
-      const checkSick = jest.fn();
-      const healthcheck = jest.fn();
+      const checkHealthy = vi.fn();
+      const checkSick = vi.fn();
+      const healthcheck = vi.fn();
       const irene = new IreneKills();
       irene.resource('jest1', {
         healthy: async () => {
@@ -814,9 +800,9 @@ describe('Irene Kills', function () {
       expect(irene.mood()).toBe('healthy');
     });
     it('First sick and then still sick', async () => {
-      const checkHealthy = jest.fn();
-      const checkSick = jest.fn();
-      const healthcheck = jest.fn();
+      const checkHealthy = vi.fn();
+      const checkSick = vi.fn();
+      const healthcheck = vi.fn();
       const irene = new IreneKills();
       irene.resource('jest1', {
         healthy: async () => {
@@ -848,7 +834,7 @@ describe('Irene Kills', function () {
   describe('Resource value tests', () => {
     it('Value will be available @ need', async () => {
       const irene = new IreneKills();
-      const checkValueFn = jest.fn();
+      const checkValueFn = vi.fn();
       irene.resource('a', {
         value: { msg: 'test' },
         need: async ({ value }) => {
@@ -862,7 +848,7 @@ describe('Irene Kills', function () {
     });
     it('Value will be available @ check', async () => {
       const irene = new IreneKills();
-      const checkValueFn = jest.fn();
+      const checkValueFn = vi.fn();
       irene.resource('a', {
         value: { msg: 'test' },
         check: async ({ value }) => {
@@ -876,7 +862,7 @@ describe('Irene Kills', function () {
     });
     it('Value will be available @ activate', async () => {
       const irene = new IreneKills();
-      const checkValueFn = jest.fn();
+      const checkValueFn = vi.fn();
       irene.resource('a', {
         value: { msg: 'test' },
         activate: async ({ value }) => {
@@ -891,7 +877,7 @@ describe('Irene Kills', function () {
 
     it('Value will be available @ healthy', async () => {
       const irene = new IreneKills();
-      const checkValueFn = jest.fn();
+      const checkValueFn = vi.fn();
       irene.resource('a', {
         value: { msg: 'test' },
         healthy: async ({ value }) => {
@@ -906,7 +892,7 @@ describe('Irene Kills', function () {
 
     it('Value will be available @ on.healthcheck', async () => {
       const irene = new IreneKills();
-      const checkValueFn = jest.fn();
+      const checkValueFn = vi.fn();
       irene.resource('a', {
         value: { msg: 'test' },
         healthy: async ({ value }) => {
