@@ -1,6 +1,6 @@
 {
   "name": "@iad-os/irene-kills-es",
-  "version": "0.0.6-alpha",
+  "version": "0.0.7-alpha",
   "description": "Yes ... only if necessary, but ... Irene Kills!",
   "engines": {
     "node": ">= 18"

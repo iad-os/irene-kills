@@ -1,5 +1,5 @@
 import EventEmitter from 'node:events';
-import { consoleLoggerDefault, Logger } from './IreneKills';
+import { consoleLoggerDefault, Logger } from './IreneKills.js';
 
 export type Signals = 'wakeup' | 'refresh' | 'health' | 'sick' | 'stop';
 

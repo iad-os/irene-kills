@@ -1,5 +1,5 @@
-import { IreneKills } from '../IreneKills';
-import { wait } from './utils.test';
+import { IreneKills } from '../IreneKills.js';
+import { wait } from './utils.test.js';
 
 describe('Irene Kills Common Scenarios', function () {
   afterEach(() => {

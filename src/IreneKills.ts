@@ -1,5 +1,5 @@
 import _ from 'lodash-es';
-import { FSAManager, Signals } from './FSAManager';
+import { FSAManager, Signals } from './FSAManager.js';
 
 interface IreneKill {
   kill: boolean; // Should Kill
