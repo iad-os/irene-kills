@@ -3,18 +3,18 @@ import { wait } from './utils.test';
 
 describe('Irene Kills Common Scenarios', function () {
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
-  //jest.setTimeout(5000);
+  //vi.setTimeout(5000);
   it('Episode 0 - Timeout waking up', async () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     const irene = new IreneKills();
     irene.resource('slooooower', {
       value: { ciao: 'mondo' },
       need: () => wait(10000, { ciao: 'mondo2' }),
     });
     const wakeUp = irene.wakeUp({ timeout: 100 });
-    jest.advanceTimersByTime(1000);
+    vi.advanceTimersByTime(1000);
     await expect(wakeUp).rejects.toMatch('timeout');
   });
   it('Episode 1 - Sample App with some slow component', async () => {

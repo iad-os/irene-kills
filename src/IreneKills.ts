@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash-es';
 import { FSAManager, Signals } from './FSAManager';
 
 interface IreneKill {
@@ -83,7 +83,7 @@ export const consoleLoggerDefault: Logger = {
   info: (body, msg) => {
     console.log(body, msg);
   },
-  debug:(body, msg) => {
+  debug: (body, msg) => {
     console.log(body, msg);
   },
 };
@@ -98,12 +98,12 @@ export class IreneKills {
     this.fsm = new FSAManager({
       states: {
         initialize: {
-          activate: async ({ current, signal }) => {
-            const arrayResources = _(this.resources)
+          activate: async ({ signal }) => {
+            const arrayResources = _.chain(this.resources)
               .map((resource, name) => ({ name, resource }))
               .value();
 
-            const promises = _(arrayResources)
+            const promises = _.chain(arrayResources)
               .map(async ({ resource, name }) => {
                 if (!resource.need)
                   return await { name, resource, value: resource.value };
@@ -122,7 +122,7 @@ export class IreneKills {
 
             const results = await Promise.allSettled(promises);
 
-            const isRejected = checkIfRejected<Awaited<typeof promises[0]>>(
+            const isRejected = checkIfRejected<Awaited<(typeof promises)[0]>>(
               results,
               arrayResources,
             );
@@ -148,11 +148,11 @@ export class IreneKills {
         },
         check: {
           activate: async ({ signal }) => {
-            const arrayResources = _(this.resources)
+            const arrayResources = _.chain(this.resources)
               .map((resource, name) => ({ name, resource }))
               .value();
 
-            const promises = _(arrayResources)
+            const promises = _.chain(arrayResources)
               .map(async ({ resource, name }) => {
                 if (!resource.check)
                   return await { name, resource, value: true };
@@ -170,7 +170,7 @@ export class IreneKills {
               .value();
 
             const results = await Promise.allSettled(promises);
-            const isRejected = checkIfRejected<Awaited<typeof promises[0]>>(
+            const isRejected = checkIfRejected<Awaited<(typeof promises)[0]>>(
               results,
               arrayResources,
             );
@@ -211,12 +211,12 @@ export class IreneKills {
           },
         },
         activate: {
-          activate: async ({ current, signal }) => {
-            const arrayResources = _(this.resources)
+          activate: async ({ signal }) => {
+            const arrayResources = _.chain(this.resources)
               .map((resource, name) => ({ name, resource }))
               .value();
 
-            const promises = _(arrayResources)
+            const promises = _.chain(arrayResources)
               .map(async ({ resource, name }) => {
                 if (!resource.activate)
                   return {
@@ -245,7 +245,7 @@ export class IreneKills {
 
             const results = await Promise.allSettled(promises);
 
-            const isRejected = checkIfRejected<Awaited<typeof promises[0]>>(
+            const isRejected = checkIfRejected<Awaited<(typeof promises)[0]>>(
               results,
               arrayResources,
             );
@@ -297,11 +297,11 @@ export class IreneKills {
           },
         },
         healthy: {
-          activate: async ({ current, signal }) => {
-            const arrayResources = _(this.resources)
+          activate: async ({ signal }) => {
+            const arrayResources = _.chain(this.resources)
               .map((resource, name) => ({ name, resource }))
               .value();
-            const promises = _(arrayResources)
+            const promises = _.chain(arrayResources)
               .map(async ({ resource, name }) => {
                 if (!resource.healthy)
                   return {
@@ -323,7 +323,7 @@ export class IreneKills {
               .value();
 
             const results = await Promise.allSettled(promises);
-            const isRejected = checkIfRejected<Awaited<typeof promises[0]>>(
+            const isRejected = checkIfRejected<Awaited<(typeof promises)[0]>>(
               results,
               arrayResources,
             );
@@ -338,11 +338,11 @@ export class IreneKills {
           },
         },
         sick: {
-          activate: async ({ current, signal }) => {
-            const arrayResources = _(this.resources)
+          activate: async () => {
+            const arrayResources = _.chain(this.resources)
               .map((resource, name) => ({ name, resource }))
               .value();
-            const promises = _(arrayResources)
+            const promises = _.chain(arrayResources)
               .map(async ({ resource, name }) => {
                 if (!resource.sick || typeof resource.sick === 'boolean')
                   return await {
@@ -363,7 +363,7 @@ export class IreneKills {
               .value();
 
             const results = await Promise.allSettled(promises);
-            const isRejected = checkIfRejected<Awaited<typeof promises[0]>>(
+            const isRejected = checkIfRejected<Awaited<(typeof promises)[0]>>(
               results,
               arrayResources,
             );
@@ -401,7 +401,7 @@ export class IreneKills {
           },
         },
         Irene: {
-          activate: async ({ current, signal }) => {
+          activate: async ({ signal }) => {
             this.kill(signal);
           },
         },
@@ -437,7 +437,7 @@ export class IreneKills {
     });
   }
 
-  kill(reason?: any) {
+  kill(reason?: unknown) {
     setImmediate(() => {
       process.exit(reason === 'stop' ? 0 : 1);
     });
@@ -472,7 +472,7 @@ export class IreneKills {
   async healthcheck(opt?: { timeout: number | null }): Promise<{
     healthy: boolean;
     resources: Record<string, IreneHealthy>;
-    errors: Record<string, any>;
+    errors: Record<string, unknown>;
   }> {
     return timeout(opt?.timeout ?? null, async () => {
       await Promise.race([
@@ -481,7 +481,7 @@ export class IreneKills {
       ]);
 
       const healthcheck = await Promise.all(
-        _(this.resources)
+        _.chain(this.resources)
           .map(async (resource, name) => {
             if (!resource?.on?.healthcheck) {
               return { name, resource, response: undefined };
@@ -515,7 +515,7 @@ export class IreneKills {
         { healthy: true, resources: {}, errors: {} } as {
           healthy: boolean;
           resources: Record<string, IreneHealthy>;
-          errors: Record<string, any>;
+          errors: Record<string, unknown>;
         },
       );
 
@@ -548,13 +548,13 @@ function checkIfRejected<T>(
   results: PromiseSettledResult<T>[],
   arrayResources: {
     name: string;
-    resource: IreneResource<any>;
+    resource: IreneResource<unknown>;
   }[],
 ) {
   return results
     .map((promiseInfo, index) => ({
       promiseInfo,
-      resource: arrayResources[index].name,
+      resource: arrayResources[index]?.name,
     }))
     .filter(({ promiseInfo }) => promiseInfo.status === 'rejected');
 }
