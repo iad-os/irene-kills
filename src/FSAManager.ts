@@ -1,4 +1,4 @@
-import { EventEmitter } from 'stream';
+import EventEmitter from 'node:events';
 import { consoleLoggerDefault, Logger } from './IreneKills';
 
 export type Signals = 'wakeup' | 'refresh' | 'health' | 'sick' | 'stop';

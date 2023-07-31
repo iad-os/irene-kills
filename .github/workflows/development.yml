@@ -6,6 +6,7 @@ on:
       - main
       - alpha
       - beta
+      - esm-irene-kill
 
 jobs:
   build:
